@@ -1,9 +1,9 @@
 {
-    "Identifier": "",
-    "Slug": "",
-    "Status": "",
-    "Title": "",
-    "Description": "",
+    "Identifier": "eos22io",
+    "Slug": "idl-ppbopt",
+    "Status": "In progress",
+    "Title": "Human Plasma Protein Binding (PPB) of Compounds",
+    "Description": "IDL-PPBopt aims at identifying the chemical substructures in small molecules that drive plasma protein binding (PPB). Using a curated PPB dataset, the authors identify the substructures that drive ppb in the molecules, identifying a total of 22 privileged substructures (GPSubs). In a second step, they identify second chemical rules for each GPSub and obtain substructure pairs that can be used to optimize PPB during drug design.",
     "Mode": "",
     "Task": [],
     "Input": [],
@@ -12,8 +12,10 @@
     "Output Type": [],
     "Output Shape": "",
     "Interpretation": "",
-    "Tag": [],
-    "Publication": "",
-    "Source Code": "",
-    "License": ""
+    "Tag": [
+        "Plasma Protein Binding"
+    ],
+    "Publication": "https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297",
+    "Source Code": "https://github.com/Louchaofeng/IDL-PPBopt",
+    "License": "GPL-3.0"
 }

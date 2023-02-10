@@ -137,7 +137,7 @@ def eval(model, dataset,feature_dicts):
 
         x_atom, x_bonds, x_atom_index, x_bond_index, x_mask, smiles_to_rdkit_list = get_smiles_array(smiles_list,feature_dicts)
         
-        atoms_prediction, mol_prediction = model(torch.Tensor(x_atom).to(device),torch.Tensor(x_bonds).to(device),torch.LongTensor(x_atom_index).to(device),torch.LongTensor(x_bond_index).to(device),torch.Tensor(x_mask).to(device))
+        atoms_prediction, mol_prediction = model(torch.Tensor(x_atom),torch.Tensor(x_bonds),torch.LongTensor(x_atom_index),torch.LongTensor(x_bond_index),torch.Tensor(x_mask))
 #        MAE = F.l1_loss(mol_prediction, torch.Tensor(y_val).view(-1,1), reduction='none')
 #        MSE = F.mse_loss(mol_prediction, torch.Tensor(y_val).view(-1,1), reduction='none')
 #         print(x_mask[:2],atoms_prediction.shape, mol_prediction,MSE)
@@ -165,7 +165,7 @@ def dataset(compounds):
 with open(input_file, "r") as f:
     reader = csv.reader(f)
     next(reader)  # skip header
-    smiles_list = [r[0] for r in reader]
+    smiles_list = [r[2] for r in reader]
 
 # run model
 my_model(smiles_list)

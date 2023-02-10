@@ -6,11 +6,11 @@
     "Description": "IDL-PPBopt aims at identifying the chemical substructures in small molecules that drive plasma protein binding (PPB). Using a curated PPB dataset, the authors identify the substructures that drive ppb in the molecules, identifying a total of 22 privileged substructures (GPSubs). In a second step, they identify second chemical rules for each GPSub and obtain substructure pairs that can be used to optimize PPB during drug design.",
     "Mode": "",
     "Task": [],
-    "Input": [],
-    "Input Shape": "",
-    "Output": [],
-    "Output Type": [],
-    "Output Shape": "",
+    "Input": ["Compound"],
+    "Input Shape": "Single",
+    "Output": ["Compound"],
+    "Output Type": ["Float"],
+    "Output Shape": "Single",
     "Interpretation": "",
     "Tag": [
         "Plasma Protein Binding"

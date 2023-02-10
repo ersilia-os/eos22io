@@ -165,7 +165,7 @@ def dataset(compounds):
 with open(input_file, "r") as f:
     reader = csv.reader(f)
     next(reader)  # skip header
-    smiles_list = [r[2] for r in reader]
+    smiles_list = [r[0] for r in reader]
 
 # run model
 my_model(smiles_list)

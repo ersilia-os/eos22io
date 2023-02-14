@@ -4,16 +4,16 @@
     "Status": "In progress",
     "Title": "Human Plasma Protein Binding (PPB) of Compounds",
     "Description": "IDL-PPBopt aims at identifying the chemical substructures in small molecules that drive plasma protein binding (PPB). Using a curated PPB dataset, the authors identify the substructures that drive ppb in the molecules, identifying a total of 22 privileged substructures (GPSubs). In a second step, they identify second chemical rules for each GPSub and obtain substructure pairs that can be used to optimize PPB during drug design.",
-    "Mode": "",
-    "Task": [],
+    "Mode": "Pretrained",
+    "Task": ["Regression"],
     "Input": ["Compound"],
     "Input Shape": "Single",
-    "Output": ["Compound"],
-    "Output Type": ["Float"],
-    "Output Shape": "Single",
-    "Interpretation": "",
+    "Output": ["Experimental value"],
+    "Output Type": ["String","Float"],
+    "Output Shape": "List",
+    "Interpretation": "This model receives canonical smiles as input and returns as output the fraction PPB, which measures the affinity of the binding of the plasma protein. In the analysis of results by the author, they indicate high affinity (fraction of ppb >80%), medium affinity (40% <= fraction of ppb <=80%) and as low levels of affinity (fraction of ppb < 40%). Additionally, based on this model, the privileged substructures related to PPB are also obtained. The model also returns the attention weights, therefore, starting from a Wilcoxon model, those privileged substructures with the highest attention weights can be extracted.",
     "Tag": [
-        "Plasma Protein Binding"
+        "Fraction bound","ADME"
     ],
     "Publication": "https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297",
     "Source Code": "https://github.com/Louchaofeng/IDL-PPBopt",

@@ -69,7 +69,6 @@ import operator
 from cairosvg import svg2png
 
 
-
 def eval_for_viz(model, viz_list,batch_size):
     model.eval()
     test_MAE_list = []
@@ -317,7 +316,7 @@ remained_df.to_csv('temp.csv')
 #Get atom attention weights
 
 # Notably: for more than 500 compounds, be cautious!
-'''smi_aw = get_smi_aw(remained_df)
+smi_aw = get_smi_aw(remained_df)
 len(smi_aw)
 
 #Identify Privileged Substructure for each molecule. 
@@ -550,4 +549,4 @@ with open('Results.smi','w')	as f:
     f.write('SA_Fragment\tNAS\tScore\tRES\tCES\tZES\tNTS\n')
     for	i in range(len(r)):
         f.write(str(r[i]['SA'])+'\t'+str(r[i]['Non_SAs'])+'\t'+str(r[i]['score'])+'\t'+str(r[i]['RES'])+'\t'+str(r[i]['CES'])+'\t'+str(r[i]['ZES'])+'\t'+str(r[i]['NTS']))+'\n'
-    f.close()'''
+    f.close()

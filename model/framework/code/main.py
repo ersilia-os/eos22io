@@ -57,7 +57,8 @@ def my_model(smiles_list):
     remained_df = smiles_tasks_df[smiles_tasks_df["can_smiles"].isin(feature_dicts['smiles_to_atom_mask'].keys())]
     uncovered_df = smiles_tasks_df.drop(remained_df.index)
     print(str(len(uncovered_df.can_smiles))+' compounds cannot be featured')
-    remained_df = remained_df.reset_index(drop=True)
+    remained_df = remained_df.reset_index(drop=False)
+    
 
     #Load the model
     p_dropout= 0.1
@@ -96,65 +97,18 @@ def my_model(smiles_list):
 
     #Predict values
     remain_pred_list = eval(model, remained_df,feature_dicts)
+
     remained_df['Predicted_values'] = remain_pred_list
+
+    lista_ppb= []
+    for x in df.index:
+        if x not in remained_df['index'].values:
+            lista_ppb.append(np.nan)
+        else:
+            value_ppb= remained_df.loc[remained_df['index'] == x, 'Predicted_values'].iloc[0]
+            lista_ppb.append(value_ppb)
     
-    #remained_df.to_csv('temp.csv', index=False)
-
-    #Get atom attention weights
-    # Notably: for more than 500 compounds, be cautious!
-    smi_aw = get_smi_aw(remained_df,model_for_viz)
-    len(smi_aw)
-
-    #Identify Privileged Substructure for each molecule. 
-    df_ppb_psubs= pd.DataFrame()
-    psubs_list=[]
-    ppb_fractation_list=[]
-    for key,value in smi_aw.items():
-        print(key)
-        grinder = Grinder(3,18)
-        fragment_list = fragments(collectSubs(dataset([key]),grinder))
-        psubs = []
-        for fragment in fragment_list:
-            patt = Chem.MolFromSmarts(fragment)
-            smiles = Chem.MolFromSmiles(key)
-            atom_numbers = smiles.GetSubstructMatches(patt)
-            for j in range(len(atom_numbers)):
-                fragment_atoms = [smi_aw[key][i] for i in atom_numbers[j]]
-                rest_atoms = [smi_aw[key][i] for i in range(0,len(smi_aw[key]),1) if i not in atom_numbers[j]]
-                if len(rest_atoms) < 3:
-                    pass
-                else:
-                    try:
-                        p_value = stats.mannwhitneyu(fragment_atoms,rest_atoms,alternative = 'greater')[1]
-                        if p_value < 0.05:
-                            psubs.append(fragment)
-                    except ValueError:
-                        pass
-        psubs_del = []
-        for i in range(len(psubs)-1):
-            for j in range(i+1,len(psubs)):
-                patt1 = Chem.MolFromSmarts(psubs[i])
-                patt2 = Chem.MolFromSmarts(psubs[j])
-                smi1 = Chem.MolFromSmiles(psubs[i])
-                smi2 = Chem.MolFromSmiles(psubs[j])
-                frag1 = smi2.HasSubstructMatch(patt1)
-                frag2 = smi1.HasSubstructMatch(patt2)
-                if frag1 == True:
-                    if frag2 == False:
-                        psubs_del.append(psubs[i])
-                if frag1 == False:
-                    if frag2 == True:
-                        psubs_del.append(psubs[j])
-        psub = [p for p in psubs if p not in psubs_del]
-        
-        #create a psubestructra and ppb fraction of the substructures
-        psubs_list.append(psub)
-        ppb_fractation_list.append(str(remained_df[remained_df.can_smiles == key].Predicted_values.values[0]))
-
-    df_ppb_psubs['Priviledged Substructures']= psubs_list
-    df_ppb_psubs['PPB fraction']= ppb_fractation_list
-
-    df_ppb_psubs.to_csv(output_file, index= False)
+    return lista_ppb
 
 # read SMILES from .csv file, assuming one column with header
 with open(input_file, "r") as f:
@@ -163,4 +117,14 @@ with open(input_file, "r") as f:
     smiles_list = [r[0] for r in reader]
 
 # run model
-my_model(smiles_list)
+output=my_model(smiles_list)
+
+# wirte PPB values output in a .csv file
+with open(output_file, "w") as f:
+    writer = csv.writer(f)
+    writer.writerow(["PPB_VALUES"])  # header
+    for o in output:
+        writer.writerow([o])
+
+
+

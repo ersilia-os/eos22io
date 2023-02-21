@@ -13,4 +13,5 @@ model.to(device)
 And everything that used CUDA like torch.cuda.LongTensor was changed to torch.LongTensor.
 Set to install pytorch with cpu only (this is specified in the docker file).
 Removed the save_models folder, since the checkpoints were stored in the checkpoints folder.
-Functionalities that are not needed in eersilia were finally removed, such as painting the molecule, everything related to this functionality was removed.
+Functionalities that are not needed in ersilia were finally removed, such as painting the molecule, everything related to this functionality was removed.
+For compounds like Inorganics and salts where the model is unable to calculate ppb values, the output is set to null.

@@ -38,9 +38,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # my model
 def my_model(smiles_list):
-        
     df = pd.DataFrame({'can_smiles': smiles_list})
-
     smiles_tasks_df = df.copy()
     smilesList = smiles_tasks_df.can_smiles.values
     remained_smiles=smiles_list
@@ -56,18 +54,16 @@ def my_model(smiles_list):
     feature_dicts = save_smiles_dicts(smilesList,filename)
     remained_df = smiles_tasks_df[smiles_tasks_df["can_smiles"].isin(feature_dicts['smiles_to_atom_mask'].keys())]
     uncovered_df = smiles_tasks_df.drop(remained_df.index)
+    print(uncovered_df)
     print(str(len(uncovered_df.can_smiles))+' compounds cannot be featured')
-    remained_df = remained_df.reset_index(drop=False)
     
-
+    remained_df = remained_df.reset_index(drop=False)
     #Load the model
     p_dropout= 0.1
     fingerprint_dim = 200
-
     weight_decay = 5 # also known as l2_regularization_lambda
     learning_rate = 2.5
     output_units_num = 1 # for regression model
-
     x_atom, x_bonds, x_atom_index, x_bond_index, x_mask, smiles_to_rdkit_list = get_smiles_array([canonical_smiles_list[0]],feature_dicts)
     num_atom_features = x_atom.shape[-1]
     num_bond_features = x_bonds.shape[-1]
@@ -77,38 +73,50 @@ def my_model(smiles_list):
     
     model.to(device) ####change to CPU
     #model.cuda()
-
     best_model = torch.load(model_pretrained, map_location=torch.device('cpu')) ###change adding map_location
     #best_model = torch.load(model_pretrained)
-
     best_model_dict = best_model.state_dict()
     best_model_wts = copy.deepcopy(best_model_dict)
-
     model.load_state_dict(best_model_wts)
     (best_model.align[0].weight == model.align[0].weight).all()
-
     model_for_viz = Fingerprint_viz(radius, T, num_atom_features, num_bond_features,
                 fingerprint_dim, output_units_num, p_dropout)
     #model_for_viz.cuda()
     model_for_viz.to(device) ####change to cpu
-
     model_for_viz.load_state_dict(best_model_wts)
     (best_model.align[0].weight == model_for_viz.align[0].weight).all()
 
     #Predict values
     remain_pred_list = eval(model, remained_df,feature_dicts)
-
     remained_df['Predicted_values'] = remain_pred_list
 
+
+    #lista_ppb= remained_df.Predicted_values.values'
+    '''new_df = pd.DataFrame(index=df.index,columns=["Predicted_values"])
     lista_ppb= []
     for x in df.index:
         if x not in remained_df['index'].values:
-            lista_ppb.append(np.nan)
+            #lista_ppb.append(np.nan)
+            new_df.loc[x] = np.nan
         else:
             value_ppb= remained_df.loc[remained_df['index'] == x, 'Predicted_values'].iloc[0]
-            lista_ppb.append(value_ppb)
+            #lista_ppb.append(value_ppb)
+            new_df.loc[x] = value_ppb    
+    #response_df= pd.DataFrame({'Predicted_values': lista_ppb})
+    new_df = new_df.sort_index()'''
+
+    #df = df.reset_index(drop=False)
+    #df= df.set_index('index')
+    #remained_df= remained_df.set_index('index')
+
+    res_df= pd.merge(df, remained_df, left_index=True, right_on= 'index', how='left')
     
-    return lista_ppb
+    list_predict=res_df.Predicted_values.values
+    new_df = pd.DataFrame({'ppb': list_predict})
+
+    #return new_df
+    new_df.to_csv(output_file, index=False)
+        
 
 # read SMILES from .csv file, assuming one column with header
 with open(input_file, "r") as f:
@@ -117,14 +125,18 @@ with open(input_file, "r") as f:
     smiles_list = [r[0] for r in reader]
 
 # run model
-output=my_model(smiles_list)
+my_model(smiles_list)
+
+'''outputs = []
+for x in list(data_new["ppb"]):
+    outputs.append(x)
 
 # wirte PPB values output in a .csv file
 with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(["PPB_VALUES"])  # header
-    for o in output:
+    for o in outputs:
         writer.writerow([o])
-
+'''
 
 

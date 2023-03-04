@@ -50,14 +50,19 @@ def my_model(smiles_list):
     smiles_tasks_df['can_smiles'] =canonical_smiles_list
     assert canonical_smiles_list[0]==Chem.MolToSmiles(Chem.MolFromSmiles(smiles_tasks_df['can_smiles'][0]), isomericSmiles=True)
 
+
     #Calcule the molecula feature
     feature_dicts = save_smiles_dicts(smilesList,filename)
     remained_df = smiles_tasks_df[smiles_tasks_df["can_smiles"].isin(feature_dicts['smiles_to_atom_mask'].keys())]
-    uncovered_df = smiles_tasks_df.drop(remained_df.index)
-    print(uncovered_df)
-    print(str(len(uncovered_df.can_smiles))+' compounds cannot be featured')
     
-    remained_df = remained_df.reset_index(drop=False)
+
+    uncovered_df = smiles_tasks_df.drop(remained_df.index)
+    print(str(len(uncovered_df.can_smiles))+' compounds cannot be featured')
+
+    '''df_smiles_canonalizadas= pd.concat([uncovered_df, remained_df]).sort_index()
+    df_smiles_canonalizadas.to_csv("merge_remain_uncover.csv")'''
+    
+    remained_df = remained_df.reset_index(drop=True)
     #Load the model
     p_dropout= 0.1
     fingerprint_dim = 200
@@ -90,33 +95,14 @@ def my_model(smiles_list):
     remain_pred_list = eval(model, remained_df,feature_dicts)
     remained_df['Predicted_values'] = remain_pred_list
 
-
-    #lista_ppb= remained_df.Predicted_values.values'
-    '''new_df = pd.DataFrame(index=df.index,columns=["Predicted_values"])
-    lista_ppb= []
-    for x in df.index:
-        if x not in remained_df['index'].values:
-            #lista_ppb.append(np.nan)
-            new_df.loc[x] = np.nan
-        else:
-            value_ppb= remained_df.loc[remained_df['index'] == x, 'Predicted_values'].iloc[0]
-            #lista_ppb.append(value_ppb)
-            new_df.loc[x] = value_ppb    
-    #response_df= pd.DataFrame({'Predicted_values': lista_ppb})
-    new_df = new_df.sort_index()'''
-
-    #df = df.reset_index(drop=False)
-    #df= df.set_index('index')
-    #remained_df= remained_df.set_index('index')
-
-    res_df= pd.merge(df, remained_df, left_index=True, right_on= 'index', how='left')
-    
-    list_predict=res_df.Predicted_values.values
-    new_df = pd.DataFrame({'ppb': list_predict})
-
-    #return new_df
-    new_df.to_csv(output_file, index=False)
-        
+    #making sure it returns all values.For the compounds that it is not possible to calculate the features the output is null
+    array_ppbs= remained_df['Predicted_values'].values
+    array_missindex= uncovered_df.index.values
+    print(array_missindex)
+    for indice in array_missindex:
+        if indice < len(array_ppbs):
+            array_ppbs = np.insert(array_ppbs, indice, None)
+    return array_ppbs
 
 # read SMILES from .csv file, assuming one column with header
 with open(input_file, "r") as f:
@@ -125,11 +111,7 @@ with open(input_file, "r") as f:
     smiles_list = [r[0] for r in reader]
 
 # run model
-my_model(smiles_list)
-
-'''outputs = []
-for x in list(data_new["ppb"]):
-    outputs.append(x)
+outputs=my_model(smiles_list)
 
 # wirte PPB values output in a .csv file
 with open(output_file, "w") as f:
@@ -137,6 +119,5 @@ with open(output_file, "w") as f:
     writer.writerow(["PPB_VALUES"])  # header
     for o in outputs:
         writer.writerow([o])
-'''
 
 

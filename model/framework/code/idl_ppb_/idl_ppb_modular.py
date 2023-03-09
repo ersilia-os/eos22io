@@ -82,7 +82,12 @@ def eval(model, dataset,feature_dicts):
 #        MSE = F.mse_loss(mol_prediction, torch.Tensor(y_val).view(-1,1), reduction='none')
 #         print(x_mask[:2],atoms_prediction.shape, mol_prediction,MSE)
 #        y_val_list.extend(y_val)
-        y_pred_list.extend(np.array(mol_prediction.data.squeeze().cpu().numpy()))
+        y_pred_list.extend(np.array(mol_prediction.data.squeeze(axis=1).cpu().numpy()))
+        
+        '''if np.shape(mol_prediction.data)[0] > 1:
+            y_pred_list.extend(np.array(mol_prediction.data.squeeze().cpu().numpy()))
+        else:
+            y_pred_list.extend(np.array(mol_prediction.data.cpu().numpy())[0])'''
 
 #        eval_MAE_list.extend(MAE.data.squeeze().cpu().numpy())
 #        eval_MSE_list.extend(MSE.data.squeeze().cpu().numpy())

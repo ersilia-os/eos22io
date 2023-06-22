@@ -7,7 +7,7 @@ RUN pip install scikit-learn==1.0.2
 RUN pip install pandas==1.3.5
 RUN pip install matplotlib==3.5.3
 RUN pip install torch==1.13.1 torchvision==0.14.1
-RUN conda install -c conda-forge openbabel=3.1.1
+RUN pip install openbabel
 #RUN conda install pytorch==1.5.0 torchvision==0.6.0 cpuonly -c pytorch
 
 WORKDIR /repo

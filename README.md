@@ -23,6 +23,11 @@ IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Ba
 * [Source Code](https://github.com/Louchaofeng/IDL-PPBopt)
 * Ersilia contributor: [carcablop](https://github.com/carcablop)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos22io)
+* [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos22io) (AMD64)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).

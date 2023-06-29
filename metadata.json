@@ -1,7 +1,7 @@
 {
     "Identifier": "eos22io",
     "Slug": "idl-ppbopt",
-    "Status": "In progress",
+    "Status": "Ready",
     "Title": "Human Plasma Protein Binding (PPB) of Compounds",
     "Description": "IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Based on an interpretable deep learning model and using the algorithm fingerprinting (AFP) this model predicts the binding affinity of the plasma protein with the compound.",
     "Mode": "Pretrained",

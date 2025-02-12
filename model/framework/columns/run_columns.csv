@@ -1,0 +1,2 @@
+name,type,direction,description
+ppb_fraction,float,high,Fraction of Plasma Protein Binding (High >80% and low >40%)

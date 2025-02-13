@@ -1,2 +1,2 @@
 name,type,direction,description
-ppb_fraction,float,high,Fraction of Plasma Protein Binding (High >80% and low >40%)
+ppb_fraction,float,low,fraction of molecule bound to plasma protein (0 to 1)

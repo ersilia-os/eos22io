@@ -3,21 +3,18 @@
     "Slug": "idl-ppbopt",
     "Status": "Ready",
     "Title": "Human Plasma Protein Binding (PPB) of Compounds",
-    "Description": "IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Based on an interpretable deep learning model and using the algorithm fingerprinting (AFP) this model predicts the binding affinity of the plasma protein with the compound.\n",
+    "Description": "IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Based on an interpretable deep learning model and using the algorithm fingerprinting (AFP) this model predicts the binding affinity of the plasma protein with the compound.",
+    "Deployment": [
+        "Local"
+    ],
     "Source": "Local",
     "Source Type": "External",
+    "Task": "Annotation",
+    "Subtask": "Property calculation or prediction",
     "Input": [
         "Compound"
     ],
     "Input Dimension": 1,
-    "Task": "Annotation",
-    "Subtask": "Property calculation or prediction",
-    "Biomedical Area": [
-        "ADMET"
-    ],
-    "Target Organism": [
-        "Homo sapiens"
-    ],
     "Output": [
         "Experimental value"
     ],
@@ -28,19 +25,22 @@
         "Fraction bound",
         "ADME"
     ],
-    "Publication": "https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297",
+    "Biomedical Area": [
+        "ADMET"
+    ],
+    "Target Organism": [
+        "Homo sapiens"
+    ],
     "Publication Type": "Peer reviewed",
     "Publication Year": 2022,
+    "Publication": "https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297",
     "Source Code": "https://github.com/Louchaofeng/IDL-PPBopt",
     "License": "GPL-3.0-only",
     "Contributor": "carcablop",
     "Incorporation Date": "2023-02-03",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos22io",
     "Docker Architecture": [
         "AMD64"
-    ],
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip",
-    "Deployment": [
-        "Local"
     ]
 }

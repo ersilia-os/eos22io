@@ -42,5 +42,7 @@
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos22io",
     "Docker Architecture": [
         "AMD64"
-    ]
+    ],
+    "Model Size": 8.0,
+    "Environment Size": 4195.0
 }

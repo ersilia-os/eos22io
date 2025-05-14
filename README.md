@@ -35,13 +35,18 @@ Below are the **Output Columns** of the model:
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos22io](https://hub.docker.com/r/ersiliaos/eos22io)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `8`
 - **Environment Size (Mb):** `4195`
+- **Image Size (Mb):** `4211.68`
 
+**Computational Performance (seconds):**
+- 10 inputs: `34.72`
+- 100 inputs: `27.82`
+- 10000 inputs: `698.51`
 
 ### References
 - **Source Code**: [https://github.com/Louchaofeng/IDL-PPBopt](https://github.com/Louchaofeng/IDL-PPBopt)

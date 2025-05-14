@@ -4,7 +4,7 @@ from string import digits, ascii_letters
 from math import log
 from csv import reader
 from openbabel import OBConversion, obErrorLog
-from pybel import Smarts, readfile, readstring
+from openbabel.pybel import Smarts, readfile, readstring
 obErrorLog.SetOutputLevel(0)
 Break = 'x'
 WildCard = '[*]'

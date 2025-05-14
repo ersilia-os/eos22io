@@ -49,19 +49,10 @@ def my_model(smiles_list):
     smiles_tasks_df = smiles_tasks_df[smiles_tasks_df["can_smiles"].isin(remained_smiles)]
     smiles_tasks_df['can_smiles'] =canonical_smiles_list
     assert canonical_smiles_list[0]==Chem.MolToSmiles(Chem.MolFromSmiles(smiles_tasks_df['can_smiles'][0]), isomericSmiles=True)
-
-
     #Calcule the molecula feature
     feature_dicts = save_smiles_dicts(smilesList,filename)
     remained_df = smiles_tasks_df[smiles_tasks_df["can_smiles"].isin(feature_dicts['smiles_to_atom_mask'].keys())]
-    
-
     uncovered_df = smiles_tasks_df.drop(remained_df.index)
-    print(str(len(uncovered_df.can_smiles))+' compounds cannot be featured')
-
-    '''df_smiles_canonalizadas= pd.concat([uncovered_df, remained_df]).sort_index()
-    df_smiles_canonalizadas.to_csv("merge_remain_uncover.csv")'''
-    
     remained_df = remained_df.reset_index(drop=True)
     #Load the model
     p_dropout= 0.1
@@ -79,7 +70,6 @@ def my_model(smiles_list):
     model.to(device) ####change to CPU
     #model.cuda()
     best_model = torch.load(model_pretrained, map_location=torch.device('cpu')) ###change adding map_location
-    #best_model = torch.load(model_pretrained)
     best_model_dict = best_model.state_dict()
     best_model_wts = copy.deepcopy(best_model_dict)
     model.load_state_dict(best_model_wts)
@@ -98,7 +88,6 @@ def my_model(smiles_list):
     #making sure it returns all values.For the compounds that it is not possible to calculate the features the output is null
     array_ppbs= remained_df['Predicted_values'].values
     array_missindex= uncovered_df.index.values
-    print(array_missindex)
     for indice in array_missindex:
         if indice < len(array_ppbs):
             array_ppbs = np.insert(array_ppbs, indice, None)
@@ -116,8 +105,14 @@ outputs=my_model(smiles_list)
 # wirte PPB values output in a .csv file
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["PPB_VALUES"])  # header
+    writer.writerow(["ppb_fraction"])  # header
     for o in outputs:
         writer.writerow([o])
 
 
+if os.path.exists(input_file.split(".")[0]+".pickle"):
+    os.remove(input_file.split(".")[0]+".pickle")
+
+for file in ["Dropout.patch","Fingerprint.patch", "GRUCell.patch", "Linear.patch", "ModuleList.patch"]:
+    if os.path.exists(os.path.join(root, "..", file)):
+        os.remove(os.path.join(root, "..", file))

@@ -2,8 +2,7 @@
 
 IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Based on an interpretable deep learning model and using the algorithm fingerprinting (AFP) this model predicts the binding affinity of the plasma protein with the compound.
 
-This model was incorporated on 2023-02-03.
-
+This model was incorporated on 2023-02-03.Last packaged on 2025-10-16.
 
 ## Information
 ### Identifiers
@@ -42,12 +41,12 @@ Below are the **Output Columns** of the model:
 ### Resource Consumption
 - **Model Size (Mb):** `8`
 - **Environment Size (Mb):** `4232`
-- **Image Size (Mb):** `4211.68`
+- **Image Size (Mb):** `4212.54`
 
 **Computational Performance (seconds):**
-- 10 inputs: `34.72`
-- 100 inputs: `27.82`
-- 10000 inputs: `698.51`
+- 10 inputs: `29.1`
+- 100 inputs: `20.03`
+- 10000 inputs: `194.33`
 
 ### References
 - **Source Code**: [https://github.com/Louchaofeng/IDL-PPBopt](https://github.com/Louchaofeng/IDL-PPBopt)

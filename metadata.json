@@ -38,6 +38,8 @@
     "License": "GPL-3.0-only",
     "Contributor": "carcablop",
     "Incorporation Date": "2023-02-03",
+    "Last Packaging Date": "2025-10-16",
+    "Release": "v1.0.0",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos22io",
     "Docker Architecture": [
@@ -46,10 +48,10 @@
     ],
     "Model Size": 8.0,
     "Environment Size": 4232.0,
-    "Image Size": 4211.68,
-    "Computational Performance 1": 34.72,
-    "Computational Performance 2": 24.8,
-    "Computational Performance 3": 27.82,
-    "Computational Performance 4": 136.94,
-    "Computational Performance 5": 698.51
+    "Image Size": 4212.54,
+    "Computational Performance 1": 29.1,
+    "Computational Performance 2": 18.96,
+    "Computational Performance 3": 20.03,
+    "Computational Performance 4": 47.83,
+    "Computational Performance 5": 194.33
 }

@@ -50,7 +50,7 @@ Below are the **Output Columns** of the model:
 
 ### References
 - **Source Code**: [https://github.com/Louchaofeng/IDL-PPBopt](https://github.com/Louchaofeng/IDL-PPBopt)
-- **Publication**: [https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297](https://pubs.acs.org/doi/10.1021/acs.jcim.2c00297)
+- **Publication**: [https://doi.org/10.1021/acs.jcim.2c00297](https://doi.org/10.1021/acs.jcim.2c00297)
 - **Publication Type:** `Peer reviewed`
 - **Publication Year:** `2022`
 - **Ersilia Contributor:** [carcablop](https://github.com/carcablop)

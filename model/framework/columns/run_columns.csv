@@ -1,2 +1,2 @@
 name,type,direction,description
-ppb_fraction,float,low,fraction of molecule bound to plasma protein (0 to 1)
+ppb_fraction,float,high,fraction of molecule bound to plasma protein (0 to 1)

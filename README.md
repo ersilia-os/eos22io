@@ -1,6 +1,6 @@
 # Human Plasma Protein Binding (PPB) of Compounds
 
-IDL-PPB aims to obtain the plasma protein binding (PPB) values of a compound. Based on an interpretable deep learning model and using the algorithm fingerprinting (AFP) this model predicts the binding affinity of the plasma protein with the compound.
+Predicts the fraction of a compound bound to human plasma proteins, which determines how much circulates free and available to reach its target. Lou and colleagues built IDL-PPBopt around an interpretable deep learning architecture that identifies the substructures pushing binding up or down, turning the model into an optimisation aid rather than a black box. High binding above 0.8 leaves little free drug, while values below 0.4 indicate weak association. Predictions describe equilibrium binding and not the clearance that follows from it.
 
 This model was incorporated on 2023-02-03.Last packaged on 2025-10-16.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2023-02-03.Last packaged on 2025-10-16.
 ### Output
 - **Output Dimension:** `1`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Fraction of PPB (protein plasma bounding) from 0 to 1. High affinity are fraction of ppb > 0.8, low levels of affinity are fraction of ppb < 0.4
+- **Interpretation:** Fraction of compound bound to human plasma proteins, from 0 to 1.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |

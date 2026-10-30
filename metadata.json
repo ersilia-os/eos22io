@@ -39,7 +39,7 @@
     "Contributor": "carcablop",
     "Incorporation Date": "2023-02-03",
     "Last Packaging Date": "2025-10-16",
-    "Release": "v1.0.0",
+    "Release": "v1.0.1",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos22io",
     "Docker Architecture": [

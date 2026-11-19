@@ -3,7 +3,7 @@
 Predicts the fraction of a compound bound to human plasma proteins, which sets how much drug circulates free and able to reach its target. Lou and colleagues trained an Attentive FP graph neural network on 3921 curated human binding measurements, reaching a root mean square error of 0.112 on the held-out test set, and read its attention weights to expose the substructures pushing binding up or down. Values run from 0 to 1, with above 0.8 counted as high binding and below 0.4 as low.
 
 This model was incorporated on 2023-02-03.
-Last packaged on 2025-10-16.
+Last packaged on 2026-11-19.
 
 ## Information
 ### Identifiers
@@ -36,18 +36,18 @@ Below are the **Output Columns** of the model:
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos22io](https://hub.docker.com/r/ersiliaos/eos22io)
-- **Docker Architecture:** `AMD64`, `ARM64`
+- **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos22io.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `8`
 - **Environment Size (Mb):** `1726`
-- **Image Size (Mb):** `4212.54`
+- **Image Size (Mb):** `529.83`
 
 **Computational Performance (seconds):**
-- 10 inputs: `29.1`
-- 100 inputs: `20.03`
-- 10000 inputs: `194.33`
+- 10 inputs: `25.29`
+- 100 inputs: `14.85`
+- 10000 inputs: `149.86`
 
 ### References
 - **Source Code**: [https://github.com/Louchaofeng/IDL-PPBopt](https://github.com/Louchaofeng/IDL-PPBopt)
